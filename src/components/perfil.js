@@ -1,10 +1,8 @@
-import { Text, TextInput, TouchableOpacity, View, StyleSheet, Modal, SafeAreaView, Image } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, StyleSheet, ScrollView, SafeAreaView, Image } from 'react-native';
 import { useEffect, useState, useRef, useContext } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Jogos } from './jogo'
+import LinearGradient from 'react-native-linear-gradient';
 import GamesContext from '../contexts/gamesContexts'
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Perfil({ navigation }) {
     const [trueFalse, setTrueFalse] = useState(true)
@@ -13,54 +11,72 @@ export default function Perfil({ navigation }) {
 
     const games = useContext(GamesContext)
     return (
-        <SafeAreaView style={styles.geral}>
+        <ScrollView contentContainerStyle={styles.geral}>
+            <View style={styles.header}>
+                <Text style={styles.nome}>Perfil</Text>
 
-            <View style={styles.container}>
-
-                <Text>Foto</Text>
-                <Image source={{
-                    uri: 'https://pngimg.com/uploads/ninja/ninja_PNG26.png'
-                }}
-                    style={styles.avatar} />
-                <TouchableOpacity></TouchableOpacity>
-
-                <Text style={styles.nome}>Username</Text>
-
-                {(trueFalse === true) ? <Text>{descricao}</Text> : <TextInput
-                    onChangeText={setDescricao}
-                    defaultValue={descricao}></TextInput>}
-                <View style={styles.descricao}>
-                    <Text>Descrição</Text>
-                </View>
-                <Text style={styles.nome}>Eu jogo em:</Text>
-
-                {/* adicionar flatlist */}
-
-                <Text>Jogos favoritos</Text>
-
-                {(trueFalse === true) ? <Text>flatlist aqui</Text> : <TouchableOpacity
-                    onPress={() => { navigation.navigate("Jogos") }}><Text>Editar Jogos</Text></TouchableOpacity>}
-                <Text>Horarios disponiveis</Text>
-
-                <View>
-                    <Text>inicio</Text>
-                    <Text>HoraInicio</Text>
-                </View>
-
-                <View>
-                    <Text>Fim</Text>
-                    <Text>HoraFim</Text>
-                </View>
                 {(trueFalse === true) ? <TouchableOpacity
                     onPress={() => { setTrueFalse(false) }}
-                ><Text>Editar</Text></TouchableOpacity> : <TouchableOpacity
+                ><Icon name="plus" size={20} color='#FFFF' /></TouchableOpacity> : <TouchableOpacity
                     onPress={() => { setTrueFalse(true) }}
                 ><Text>Salvar</Text></TouchableOpacity>}
-
-                <Text>{games}</Text>
-
             </View>
-        </SafeAreaView>
+
+            <View style={styles.container}>
+                <LinearGradient
+                    colors={['#838993', '#042960']} style={styles.gradiente}>
+
+                    <Image source={{
+                        uri: 'https://pngimg.com/uploads/ninja/ninja_PNG26.png'
+                    }}
+                        style={styles.avatar} />
+                    <TouchableOpacity><Text>Foto</Text></TouchableOpacity>
+
+                    <Text style={styles.nome}>Username</Text>
+
+                    {(trueFalse === true) ? <Text>{descricao}</Text> : <TextInput
+                        onChangeText={setDescricao}
+                        defaultValue={descricao}></TextInput>}
+                </LinearGradient>
+            </View>
+            <Text style={styles.nome}>Sobre mim</Text>
+            <View style={styles.container}>
+                <LinearGradient
+                    colors={['#838993', '#042960']} style={styles.gradiente}>
+                    <TextInput />
+                </LinearGradient>
+            </View>
+            <Text style={styles.nome}>Plataformas</Text>
+                    <View>
+                        <LinearGradient colors={['#838993', '#042960']} style={styles.gradienteMenor}>
+                            <Text>PC</Text>
+                        </LinearGradient>
+                    </View>
+            <Text style={styles.nome}>Jogos favoritos</Text>
+
+            {(trueFalse === true) ? <Text>flatlist aqui</Text> : <TouchableOpacity
+                onPress={() => { navigation.navigate("Jogos") }}><Text>Editar Jogos</Text></TouchableOpacity>}
+            <Text style={styles.nome}>Horarios disponiveis</Text>
+
+            <View>
+                <Text>inicio</Text>
+                <Text>HoraInicio</Text>
+            </View>
+
+            <View>
+                <Text>Fim</Text>
+                <Text>HoraFim</Text>
+            </View>
+            {(trueFalse === true) ? <TouchableOpacity
+                onPress={() => { setTrueFalse(false) }}
+            ><Text>Editar</Text></TouchableOpacity> : <TouchableOpacity
+                onPress={() => { setTrueFalse(true) }}
+            ><Text>Salvar</Text></TouchableOpacity>}
+
+            <Text>{games}</Text>
+
+       
+        </ScrollView >
     )
 }
 
@@ -68,22 +84,15 @@ export default function Perfil({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        width: '80%',
-        height: '90%',
-        backgroundColor: '#0C2844',
-        alignSelf: 'center',
-        alignItems: 'center',
-        marginTop: '8%',
-        borderWidth: 4,
-        shadowOffset: { width: '10', height: '20' },
-        shadowColor: 'red',
-        borderRadius: 10,
-        padding: '8%'
+        width: '100%',
+        height: '20%',
     },
     geral: {
-        justifyContent: 'center',
-        alignContent: 'center',
-        backgroundColor: '#E7F8FE'
+
+        backgroundColor: '#00182F',
+        width: '100%',
+        height: '100%',
+        padding: '4%'
     },
     botaofoto: {
         width: 150,
@@ -94,23 +103,46 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     avatar: {
-        width: '35%',
-        height: '15%',
-        backgroundColor: 'grey',
-        padding: '7%',
-        borderRadius: 100
+        width: '15%',
+        height: '39%',
+        margin: '3%',
+        borderRadius: 100,
+        borderWidth: 2,
+        borderColor: '#FFF'
     },
-    nome:{
+    nome: {
         fontWeight: 'bold',
+        fontSize: 20,
         color: '#FFFF',
         marginTop: '5%'
     },
-    descricao:{
+    descricao: {
         width: '85%',
         height: '15%',
         backgroundColor: '#DBF6FF',
         borderRadius: 20,
-        justifyContent:'center',
+        justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'flex-start'
+    },
+    gradiente: {
+        height: '100%',
+        flexDirection: 'row',
+        borderBottomRightRadius: 40,
+        borderRadius: 16,
+        marginTop: '2%'
+    },
+    gradienteMenor: {
+        borderRadius: 40,
+        width: '30%', 
+        height: '23%',
+        padding:'1%', 
+        marginTop: '3%',
+        alignSelf: 'center',
+        alignItems: 'center'
+    },
+
 })

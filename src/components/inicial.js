@@ -1,13 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import  LinearGradient  from 'react-native-linear-gradient';
 import * as Animatable from 'react-native-animatable'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function Init({ navigation }) {
   return (
-    
-   <SafeAreaView style={styles.container}>
+    <LinearGradient
+        colors={['#EAAFC8', '#656565']} style={{height:'100%'}}>
+   <SafeAreaView>
       <View  style={styles.myduo}>
         <Animatable.View
         animation="fadeInDown" 
@@ -38,6 +39,7 @@ export default function Init({ navigation }) {
       </Animatable.View>
     
       </SafeAreaView>
+      </LinearGradient>
   );
 }
 

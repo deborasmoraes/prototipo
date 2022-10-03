@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ImageBackground } from 'react-native';
-import  {LinearGradient} from 'expo-linear-gradient';
+import  LinearGradient from 'react-native-linear-gradient';
 import * as Animatable from 'react-native-animatable'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -7,14 +7,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 export default function PageLogin({ navigation }) {
 
     return (
-        // <LinearGradient
-        //     style={styles.gradient}
-        //     colors={['#C2CBFB', '#FFFF']}
-        //     start={{ x: 90, y: 40 }}
-        //     end={{ x: 5, y: 80 }}
-        // >
-        
-            <View style={{backgroundColor:'#E7F8FE'}}>
+        <LinearGradient
+        colors={['#656565', '#EAAFC8']} style={{height:'100%'}}>
+            <View>
                 <ImageBackground
                     source={require('../../assets/minicial.png')}
                     style={styles.m}>
@@ -71,6 +66,7 @@ export default function PageLogin({ navigation }) {
 
 
             </View>
+            </LinearGradient>
     )
 
 
